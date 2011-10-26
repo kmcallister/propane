@@ -11,6 +11,6 @@ translate :: R2 -> Image a -> Image a
 translate (dx,dy) im (x,y) = im (x-dx, y-dy)
 
 rotate :: Angle -> Image a -> Image a
-rotate th im = \(x,y) -> im (x*cth, y*sth) where
+rotate th im = \(x,y) -> im (x*cth + y*sth, y*cth + x*sth) where
     cth = cos (-th)
     sth = sin (-th)
