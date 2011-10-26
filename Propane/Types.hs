@@ -32,7 +32,5 @@ data Size = Size
 newtype Raster = Raster (R.Array R.DIM3 Word8)
     deriving (Eq, Show, Typeable)
 
-data Rastimation = Rastimation
-    { raFrameDuration :: Time
-    , raFrames        :: S.Seq Raster
-    } deriving (Eq, Show, Typeable)
+newtype Rastimation = Rastimation (S.Seq Raster)
+    deriving (Eq, Show, Typeable)
