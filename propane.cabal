@@ -22,6 +22,7 @@ library
     , Propane.Raster
     , Propane.IO
     , Propane.Colour
+    , Propane.Transform
   ghc-options:      -Wall
   build-depends:
       base         >= 3 && < 5
