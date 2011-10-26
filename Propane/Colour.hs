@@ -36,7 +36,7 @@ dissolve :: R -> Colour -> Colour
 dissolve = C.darken
 
 cRGBA :: R -> R -> R -> R -> Colour
-cRGBA h s v a = withOpacity (C.sRGB h s v) a
+cRGBA r g b a = withOpacity (C.sRGB r g b) a
 
 cHSVA :: R -> R -> R -> R -> Colour
 cHSVA h s v a = withOpacity (C.uncurryRGB C.sRGB (C.hsv h s v)) a
