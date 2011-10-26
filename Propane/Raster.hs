@@ -20,7 +20,7 @@ rasterize (Size w h) im = Raster . chans $ R.fromFunction dim f where
     dim = Z :. w :. h
 
     point :: R.DIM2 -> R2
-    point (Z :. x :. y) = (adj dw x, adj dh y) where
+    point (Z :. y :. x) = (adj dw x, adj dh y) where
         adj d n = (2 * fromIntegral n / d) - 1
 
     quant :: Colour -> W8888
@@ -30,7 +30,7 @@ rasterize (Size w h) im = Raster . chans $ R.fromFunction dim f where
 
     chans :: R.Array R.DIM2 W8888 -> R.Array R.DIM3 Word8
     chans arr = R.traverse arr (:. 4) chan where
-        chan a (Z :. x :. y :. c) = ix c (a (Z :. x :. y))
+        chan a (Z :. y :. x :. c) = ix c (a (Z :. y :. x))
         ix 0 (r,_,_,_) = r
         ix 1 (_,g,_,_) = g
         ix 2 (_,_,b,_) = b
