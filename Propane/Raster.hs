@@ -1,13 +1,16 @@
 module Propane.Raster
     ( rasterize
+    , rastimate
     ) where
 
+import qualified Data.Sequence    as S
 import qualified Data.Colour      as C
 import qualified Data.Colour.SRGB as C
 import qualified Data.Array.Repa  as R
 import Data.Array.Repa ( Z(..), (:.)(..) )
 
 import Propane.Types
+import Propane.Transform ( spaced )
 
 type W8888 = (Word8, Word8, Word8, Word8)
 
@@ -36,3 +39,7 @@ rasterize (Size w h) im = Raster . chans $ R.fromFunction dim f where
         ix 2 (_,_,b,_) = b
         ix 3 (_,_,_,a) = a
         ix _ _ = error "Propane.Quantize: internal error (bad ix)"
+
+rastimate :: Count -> Size -> Animation Colour -> Rastimation
+rastimate n sz ani = Rastimation (S.fromList frames) where
+    frames = map (rasterize sz . ani) (spaced n 0 1)
