@@ -18,9 +18,10 @@ library
   exposed-modules:
       Propane
     , Propane.Types
+    , Propane.Helpers
     , Propane.Raster
     , Propane.IO
-    , Propane.Helpers
+    , Propane.Colour
   ghc-options:      -Wall
   build-depends:
       base         >= 3 && < 5
