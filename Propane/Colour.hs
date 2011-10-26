@@ -2,9 +2,13 @@ module Propane.Colour
     ( BaseColour
     , opaque, transparent, withOpacity
     , blend, over, darken, dissolve
+    , cRGBA, cHSVA
     ) where
 
-import qualified Data.Colour as C
+import qualified Data.Colour              as C
+import qualified Data.Colour.SRGB         as C
+import qualified Data.Colour.RGBSpace     as C
+import qualified Data.Colour.RGBSpace.HSV as C
 
 import Propane.Types
 
@@ -30,3 +34,9 @@ darken = C.darken
 
 dissolve :: R -> Colour -> Colour
 dissolve = C.darken
+
+cRGBA :: R -> R -> R -> R -> Colour
+cRGBA h s v a = withOpacity (C.sRGB h s v) a
+
+cHSVA :: R -> R -> R -> R -> Colour
+cHSVA h s v a = withOpacity (C.uncurryRGB C.sRGB (C.hsv h s v)) a
