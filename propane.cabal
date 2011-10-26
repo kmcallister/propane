@@ -1,0 +1,39 @@
+name:                propane
+version:             0.1
+license:             BSD3
+license-file:        LICENSE
+synopsis:            FIXME
+category:            FIXME
+author:              Keegan McAllister <mcallister.keegan@gmail.com>
+maintainer:          Keegan McAllister <mcallister.keegan@gmail.com>
+build-type:          Simple
+cabal-version:       >=1.6
+description:
+    FIXME
+
+extra-source-files:
+    README
+
+library
+  exposed-modules:
+      Propane
+    , Propane.Types
+    , Propane.Raster
+    , Propane.IO
+    , Propane.Helpers
+  ghc-options:      -Wall
+  build-depends:
+      base         >= 3 && < 5
+    , containers   >= 0.4
+    , repa         >= 2.0
+    , repa-devil   >= 0.1
+    , colour       >= 2.3
+    , safe-globals >= 0.1
+
+  other-extensions:
+      DeriveDataTypeable
+    , TemplateHaskell
+
+source-repository head
+    type:     git
+    location: git://github.com/kmcallister/propane
