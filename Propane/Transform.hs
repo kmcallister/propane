@@ -1,5 +1,6 @@
 module Propane.Transform
     ( scale, translate, rotate
+    , unbal, balun
     ) where
 
 import Propane.Types
@@ -14,3 +15,9 @@ rotate :: Angle -> Image a -> Image a
 rotate th im = \(x,y) -> im (x*cth + y*sth, y*cth + x*sth) where
     cth = cos (-th)
     sth = sin (-th)
+
+unbal :: R -> R
+unbal n = (n + 1) / 2
+
+balun :: R -> R
+balun n = (n * 2) - 1
