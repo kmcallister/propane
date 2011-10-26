@@ -1,5 +1,6 @@
 module Propane.Transform
     ( scale, translate, rotate
+    , speed, shift
     , unbal, balun
     , spaced
     ) where
@@ -16,6 +17,12 @@ rotate :: Angle -> Image a -> Image a
 rotate th im = \(x,y) -> im (x*cth + y*sth, y*cth + x*sth) where
     cth = cos (-th)
     sth = sin (-th)
+
+speed :: Time -> Animation a -> Animation a
+speed r ani t = ani (r*t)
+
+shift :: Time -> Animation a -> Animation a
+shift dt ani t = ani (t-dt)
 
 unbal :: R -> R
 unbal n = (n + 1) / 2
