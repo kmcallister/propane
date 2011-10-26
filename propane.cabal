@@ -31,6 +31,9 @@ library
     , repa-devil   >= 0.1
     , colour       >= 2.3
     , safe-globals >= 0.1
+    , directory    >= 1.1
+    , filepath     >= 1.0
+    , spawn        >= 0.3
 
   other-extensions:
       DeriveDataTypeable
