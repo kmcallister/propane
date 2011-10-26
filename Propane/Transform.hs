@@ -1,6 +1,7 @@
 module Propane.Transform
     ( scale, translate, rotate
     , unbal, balun
+    , spaced
     ) where
 
 import Propane.Types
@@ -21,3 +22,7 @@ unbal n = (n + 1) / 2
 
 balun :: R -> R
 balun n = (n * 2) - 1
+
+spaced :: (Fractional a) => Count -> a -> a -> [a]
+spaced n a b = take n (iterate (+i) a) where
+    i = (b - a) / fromIntegral n
