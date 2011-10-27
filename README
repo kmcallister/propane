@@ -1,9 +1,9 @@
-FIXME
+Propane is a system for functional synthesis of images and animations.
 
-Documentation is hosted at http://hackage.haskell.org/package/FIXME
+Documentation is [FIXME: will be] hosted at http://hackage.haskell.org/package/propane
 
 To build the documentation yourself, run
 
   $ cabal configure && cabal haddock --hyperlink-source
 
-This will produce HTML documentation under dist/doc/html/FIXME
+This will produce HTML documentation under dist/doc/html/propane
