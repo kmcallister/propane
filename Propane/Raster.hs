@@ -1,3 +1,6 @@
+-- | Conversion to raster forms.
+--
+-- TODO: the reverse.
 module Propane.Raster
     ( rasterize
     , rastimate
@@ -14,6 +17,8 @@ import Propane.Transform ( spaced )
 
 type W8888 = (Word8, Word8, Word8, Word8)
 
+-- | Convert the @'Image'@ region [-1, 1] x [-1, 1] to a @'Raster'@ with
+-- the specified number of pixels.
 rasterize :: Size -> Image Colour -> Raster
 rasterize (Size w h) im = Raster . chans $ R.fromFunction dim f where
     f = quant . im . point
@@ -40,6 +45,8 @@ rasterize (Size w h) im = Raster . chans $ R.fromFunction dim f where
         ix 3 (_,_,_,a) = a
         ix _ _ = error "Propane.Quantize: internal error (bad ix)"
 
+-- | Convert the animation, for times in [0,1), to a @'Rastimation'@ with
+-- the specified numbers of frames and pixels.
 rastimate :: Count -> Size -> Animation Colour -> Rastimation
 rastimate n sz ani = Rastimation (S.fromList frames) where
     frames = map (rasterize sz . ani) (spaced n 0 1)

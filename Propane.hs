@@ -1,3 +1,4 @@
+-- | The whole Propane system, in one convenient import.
 module Propane
     ( module Propane.Types
     , module Propane.Helpers
