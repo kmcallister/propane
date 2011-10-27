@@ -13,6 +13,10 @@ description:
 
 extra-source-files:
     README
+  , examples/gradient.hs
+  , examples/green.hs
+  , examples/quasicrystal.hs
+  , examples/quasicrystal_animated.hs
 
 library
   exposed-modules:
