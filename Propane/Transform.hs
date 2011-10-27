@@ -1,5 +1,5 @@
 module Propane.Transform
-    ( scale, translate, rotate
+    ( scale, scale2, translate, rotate
     , speed, shift
     , unbal, balun
     , spaced
@@ -9,6 +9,9 @@ import Propane.Types
 
 scale :: R -> Image a -> Image a
 scale s im (x,y) = im (x/s, y/s)
+
+scale2 :: (R,R) -> Image a -> Image a
+scale2 (sx,sy) im (x,y) = im (x/sx, y/sy)
 
 translate :: R2 -> Image a -> Image a
 translate (dx,dy) im (x,y) = im (x-dx, y-dy)
