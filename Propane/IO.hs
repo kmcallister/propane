@@ -3,6 +3,14 @@
 -- | Input and output.
 --
 -- TODO: input.
+--
+-- XXX FIXME XXX: This module is not safe for multithreaded use
+-- with GHC 7.2 or earlier, due to this bug:
+--
+-- <http://hackage.haskell.org/trac/ghc/ticket/5558>
+--
+-- This will be fixed before Propane is released to Hackage.
+
 module Propane.IO
     ( saveRaster
     , saveRastimation
@@ -60,7 +68,11 @@ saveRastimation dir (Rastimation frames) = do
     when (not e)
         (throwIO . ErrorCall $ errStr ("directory does not exist: " ++ dir))
 
-    let go :: Int -> Raster -> IO (IO ())
-        go i img = spawn $ saveRaster (dir </> printf "%08d.png" i) img
+    let eval :: Raster -> IO ()
+        eval (Raster img) = evaluate (R.deepSeqArray img ())
+        go :: Int -> Raster -> IO ()
+        go i img = saveRaster (dir </> printf "%08d.png" i) img
 
-    zipWithM go [0..] (F.toList frames) >>= sequence_
+    let frs = F.toList frames
+    parMapIO_ eval     frs
+    zipWithM_ go [0..] frs
