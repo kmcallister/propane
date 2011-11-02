@@ -1,5 +1,3 @@
-{-# LANGUAGE
-    TemplateHaskell #-}
 -- | Input and output.
 --
 -- TODO: input.
@@ -13,9 +11,7 @@ import qualified Data.Array.Repa.IO.DevIL as D
 
 import qualified Data.Foldable as F
 
-import Data.Global
 import Control.Monad
-import Control.Concurrent.MVar
 import Control.Concurrent.Spawn
 import Control.Exception
 import System.FilePath
@@ -23,9 +19,8 @@ import System.Directory
 import Text.Printf
 
 import Propane.Types
+import Propane.IO.Lock ( lock )
 
--- Serialize access to DevIL, which isn't thread-safe
-declareMVar  "devilLock"  [t| () |]  [e| () |]
 
 errStr :: String -> String
 errStr = ("Propane.IO: " ++)
@@ -37,8 +32,7 @@ errStr = ("Propane.IO: " ++)
 saveRaster :: FilePath -> Raster -> IO ()
 saveRaster name (Raster img) = do
     evaluate (R.deepSeqArray img ())
-    withMVar devilLock $ \() ->
-        D.runIL (D.writeImage name img)
+    lock $ D.runIL (D.writeImage name img)
 
 -- | Save the @'Rastimation'@ to a sequence of frames in
 -- the given directory.

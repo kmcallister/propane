@@ -42,6 +42,11 @@ library
     , Propane.IO
     , Propane.Colour
     , Propane.Transform
+  other-modules:
+      Propane.IO.Lock
+  c-sources:
+      cbits/global-lock.c
+
   ghc-options:      -Wall
   build-depends:
       base         >= 3 && < 5
@@ -49,14 +54,13 @@ library
     , repa         >= 2.0
     , repa-devil   >= 0.1
     , colour       >= 2.3
-    , safe-globals >= 0.1
     , directory    >= 1.1
     , filepath     >= 1.0
     , spawn        >= 0.3
 
   other-extensions:
       DeriveDataTypeable
-    , TemplateHaskell
+    , ForeignFunctionInterface
 
 source-repository head
     type:     git
