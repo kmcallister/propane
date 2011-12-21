@@ -29,6 +29,9 @@ errStr = ("Propane.IO: " ++)
 --
 -- The file format is specified by the filename, and can
 -- be any of the formats supported by the DevIL library.
+--
+-- Note that DevIL silently refuses to overwrite an existing
+-- file.
 saveRaster :: FilePath -> Raster -> IO ()
 saveRaster name (Raster img) = do
     evaluate (R.deepSeqArray img ())
@@ -46,6 +49,9 @@ saveRaster name (Raster img) = do
 --
 -- Files are written concurrently, and there is no guarantee
 -- about which files exist, until the IO action completes.
+--
+-- Note that DevIL silently refuses to overwrite an existing
+-- file.
 saveRastimation :: FilePath -> Rastimation -> IO ()
 saveRastimation dir (Rastimation frames) = do
     createDirectoryIfMissing True dir
