@@ -4,8 +4,8 @@
 module Propane.Types
     ( -- * Basic type synonyms
       --
-      -- | These exist in order to make type signatures
-      -- be better documentation.
+      -- | These exist to improve type signatures
+      -- as documentation.
       R, R2, Time, Angle, Count
 
       -- * Images and animations
@@ -60,11 +60,11 @@ type Animation a = Time -> Image a
 
 -- | The number of pixels in a raster image.
 data Size = Size
-    { sWidth  :: Int
-    , sHeight :: Int }
+    { sWidth  :: Count
+    , sHeight :: Count }
     deriving (Eq, Ord, Read, Show, Typeable, Data)
 
--- | A @'Raster'@ is a finite rectangle of an @'Image'@ with space and colour
+-- | A @'Raster'@ is a finite rectangle of an @'Image'@, with space and colour
 -- reduced to discrete quantities.
 --
 -- It is represented by a Repa @'R.Array'@ with indices of the form
@@ -79,6 +79,6 @@ newtype Raster = Raster (R.Array R.DIM3 Word8)
 -- | A @'Rastimation'@ is an animation of @'Raster'@ frames, where time has
 -- also been reduced to a discrete quantity.
 --
--- It is represende as a sequence of @'Raster'@s.
+-- It is represented as a sequence of @'Raster'@s.
 newtype Rastimation = Rastimation (S.Seq Raster)
     deriving (Eq, Show, Typeable)
